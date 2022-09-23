@@ -8,18 +8,7 @@ spring:
       enabled: true
       path: '/console'
 
-  main:
-    banner-mode: off
-
   datasource:
     url: 'jdbc:h2:file:/home/kasabatta/dev/java-test/todo-db'
 
-
-  jpa:
-    hibernate:
-      ddl-auto: 'update'
-
-app:
-  template:
-    allowMultipleTasks: false
 

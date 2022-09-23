@@ -1,0 +1,13 @@
+
+# spring.data.rest.base-path=/api
+
+# debug: true
+spring:
+  h2:
+    console:
+      enabled: false
+
+  datasource:
+    url: 'jdbc:h2:mem:todo-db'
+
+
