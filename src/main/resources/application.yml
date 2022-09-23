@@ -1,0 +1,16 @@
+
+# spring.data.rest.base-path=/api
+
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: '/console'
+
+  datasource:
+    url: 'jdbc:h2:file:/home/kasabatta/dev/java-test/todo-db'
+
+  jpa:
+    hibernate:
+      ddl-auto: 'update'
