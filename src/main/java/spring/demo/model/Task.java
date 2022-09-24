@@ -13,7 +13,7 @@ public class Task {
     private String description;
     private boolean done;
 
-    Task() {}
+    public Task() {}
 
     public int getId() {
         return id;
@@ -38,4 +38,6 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+
 }

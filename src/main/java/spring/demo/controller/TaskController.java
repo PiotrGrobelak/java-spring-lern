@@ -65,4 +65,9 @@ class TaskController {
         return ResponseEntity.noContent().build();
     }
 
+//    @DeleteMapping("/tasks/{id}")
+//    ResponseEntity<Void> removeTask(@PathVariable int id){
+//        return ResponseEntity.noContent().build();
+//    }
+
 }
