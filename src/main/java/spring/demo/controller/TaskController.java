@@ -3,18 +3,15 @@ package spring.demo.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import spring.demo.model.Task;
 import spring.demo.model.TaskRepository;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 class TaskController {
@@ -59,15 +56,38 @@ class TaskController {
             logger.info("Task not found");
             return ResponseEntity.notFound().build();
         }
-        toUpdate.setId(id);
-        repository.save(toUpdate);
+        repository.findById(id)
+                .ifPresent(task -> {
+                    task.updateFrom(toUpdate);
+                    repository.save(task);
+                });
         logger.info("Update task" + toUpdate);
         return ResponseEntity.noContent().build();
     }
 
-//    @DeleteMapping("/tasks/{id}")
-//    ResponseEntity<Void> removeTask(@PathVariable int id){
-//        return ResponseEntity.noContent().build();
-//    }
+    @Transactional
+    @PatchMapping ("/tasks/{id}")
+    public ResponseEntity<?> toggleTask(@PathVariable int id){
+        if(!repository.existsById(id)){
+            logger.info("Task not found");
+            return ResponseEntity.notFound().build();
+        }
+        repository.findById(id)
+                .ifPresent(task -> task.setDone(!task.isDone()));
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/tasks/{id}")
+    ResponseEntity<?> deleteTask(@PathVariable int id){
+        if(!repository.existsById(id)){
+            logger.info("Task not found");
+            return ResponseEntity.notFound().build();
+        }
+//        repository.findById(id)
+//                .filter(task -> task.getId() != id);
+
+//        repository.findAll().stream().filter(task -> task.getId() != id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
