@@ -22,6 +22,10 @@ public class Task {
     @JoinColumn(name = "task_group_id")
     private TaskGroup group;
 
+    @ManyToOne()
+    @JoinColumn(name = "project_id")
+    private Project project;
+
 
 
     public Task() {}
