@@ -19,7 +19,7 @@ class TaskController {
     private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
     private final TaskRepository repository; // it can will exist but not to have use
 
-    TaskController(final TaskRepository repository){
+    TaskController(final TaskRepository repository) {
         this.repository = repository;
     }
 
@@ -37,22 +37,23 @@ class TaskController {
     }
 
     @GetMapping("/tasks/{id}")
-    ResponseEntity<Task> readTaskById(@PathVariable int id){
+    ResponseEntity<Task> readTaskById(@PathVariable int id) {
         return repository.findById(id)
                 .map(task -> ResponseEntity.ok(task))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/tasks")
-    ResponseEntity<Task> createTask(@RequestBody @Valid Task toCreate){
+    ResponseEntity<Task> createTask(@RequestBody @Valid Task toCreate) {
         logger.info("Create task" + toCreate);
         Task result = repository.save(toCreate);
-        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
+        return ResponseEntity.created(URI.create("/" + result.getId())).body
+                (result);
     }
 
     @PutMapping("/tasks/{id}")
-    ResponseEntity<Task> updateTask(@PathVariable int id, @RequestBody @Valid Task toUpdate){
-        if(!repository.existsById(id)){
+    ResponseEntity<Task> updateTask(@PathVariable int id, @RequestBody @Valid Task toUpdate) {
+        if (!repository.existsById(id)) {
             logger.info("Task not found");
             return ResponseEntity.notFound().build();
         }
@@ -66,9 +67,9 @@ class TaskController {
     }
 
     @Transactional
-    @PatchMapping ("/tasks/{id}")
-    public ResponseEntity<?> toggleTask(@PathVariable int id){
-        if(!repository.existsById(id)){
+    @PatchMapping("/tasks/{id}")
+    public ResponseEntity<?> toggleTask(@PathVariable int id) {
+        if (!repository.existsById(id)) {
             logger.info("Task not found");
             return ResponseEntity.notFound().build();
         }
@@ -78,8 +79,8 @@ class TaskController {
     }
 
     @DeleteMapping("/tasks/{id}")
-    ResponseEntity<?> deleteTask(@PathVariable int id){
-        if(!repository.existsById(id)){
+    ResponseEntity<?> deleteTask(@PathVariable int id) {
+        if (!repository.existsById(id)) {
             logger.info("Task not found");
             return ResponseEntity.notFound().build();
         }
