@@ -8,6 +8,6 @@ spring:
       path: '/console'
 
   datasource:
-    url: 'jdbc:h2:file:/home/kasabatta/dev/java-test/todo-db'
+    url: 'jdbc:h2:file:/home/kasabatta/dev/java-spring-lern/todo-db'
 
 
