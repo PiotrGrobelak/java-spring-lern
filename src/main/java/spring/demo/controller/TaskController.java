@@ -25,7 +25,7 @@ class TaskController {
 
     @GetMapping(path = "/tasks", params = {"!sort", "!page", "!size"})
     ResponseEntity<List<Task>> readAllTasks() {
-        logger.warn("Exposing all the tasks");
+        logger.info("Exposing all the tasks");
         return ResponseEntity.ok(repository.findAll());
     }
 
@@ -89,6 +89,10 @@ class TaskController {
 
 //        repository.findAll().stream().filter(task -> task.getId() != id);
         return ResponseEntity.noContent().build();
+    }
+    @PatchMapping("/tasks/some/{id}")
+    public ResponseEntity<?> moveTask(@PathVariable int id){
+        return ResponseEntity.notFound().build();
     }
 
 }
