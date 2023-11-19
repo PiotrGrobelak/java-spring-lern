@@ -10,7 +10,6 @@ import spring.demo.model.dto.GroupWriteModel;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 public class TaskGroupService {
 
     private TaskGroupRepository repository;

@@ -1,6 +1,5 @@
 package spring.demo.services;
 
-import org.springframework.stereotype.Service;
 import spring.demo.TaskConfigurationProperties;
 import spring.demo.model.*;
 import spring.demo.model.dto.GroupReadModel;
